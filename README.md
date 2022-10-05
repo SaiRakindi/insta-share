@@ -4,6 +4,21 @@ You will demonstrate your skills by creating an app that will fetch data from an
 
 This is an individual assessment. All work must be your own.
 
+
+<details>
+<summary>Project Description</summary>
+
+Implemented responsive insta share app like Instagram Clone where users can see the user stories, posts, user profile and the my profile section where the user can interact with the posts and stories like Instagram. Users can see the posts, user stories of the different users.
+
+- Implemented different routes for features like home, specific user profile page, specific my profile page using React Router components Route, Switch, Link.
+- Used Figma mockups to implement UI-rich and pixel-perfect React components.
+- Implemented Authentication by the user credentials and generated a token on succssful authentication.
+- Implemented protected route to ensure only authenticated users are able to access the pages like users, user profile, search, profile sections.
+
+Technologies used: HTML, CSS, JavaScript, React JS, Figma, Rest API Calls, React Slick.
+
+</details>
+
 ### Prerequisites
 
 #### UI Prerequisites
