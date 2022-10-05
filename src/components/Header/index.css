@@ -1,0 +1,24 @@
+.header-container {
+  display: flex;
+}
+
+.nav-heading {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #262626;
+}
+
+.logo-header-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.image-logo {
+  width: 55px;
+  height: 28px;
+  /* margin-top: 10px; */
+}
