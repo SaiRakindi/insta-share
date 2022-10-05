@@ -359,6 +359,13 @@
   list-style-type: none;
 }
 
+.failure-view-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .failure-view-image {
   width: 260px;
   height: 127px;
@@ -418,11 +425,4 @@
     font-size: 14px;
     line-height: 24px;
   }
-}
-
-.failure-view-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }

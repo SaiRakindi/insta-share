@@ -14,26 +14,26 @@ const apiStatusConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
-class UserProfile extends Component {
+class MyProfile extends Component {
   state = {
     apiStatus: apiStatusConstants.initial,
-    userProfileData: [],
+    myProfileData: [],
   }
 
   componentDidMount() {
-    this.getUserProfileDetails()
+    this.getMyProfileDetails()
   }
 
-  getUserProfileDetails = async () => {
+  getMyProfileDetails = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
 
-    const {match} = this.props
-    const {params} = match
-    const {userId} = params
+    // const {match} = this.props
+    // const {params} = match
+    // const {userId} = params
 
     const jwtToken = Cookies.get('jwt_token')
 
-    const userProfileUrl = `https://apis.ccbp.in/insta-share/users/${userId}`
+    const myProfileUrl = 'https://apis.ccbp.in/insta-share/my-profile'
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -41,27 +41,27 @@ class UserProfile extends Component {
       method: 'GET',
     }
 
-    const response = await fetch(userProfileUrl, options)
+    const response = await fetch(myProfileUrl, options)
 
     if (response.ok) {
       const data = await response.json()
       console.log(data)
 
       const formattedData = {
-        followersCount: data.user_details.followers_count,
-        followingCount: data.user_details.following_count,
-        id: data.user_details.id,
-        posts: data.user_details.posts,
-        postsCount: data.user_details.posts_count,
-        profilePic: data.user_details.profile_pic,
-        stories: data.user_details.stories,
-        userBio: data.user_details.user_bio,
-        userId: data.user_details.user_id,
-        userName: data.user_details.user_name,
+        followersCount: data.profile.followers_count,
+        followingCount: data.profile.following_count,
+        id: data.profile.id,
+        posts: data.profile.posts,
+        postsCount: data.profile.posts_count,
+        profilePic: data.profile.profile_pic,
+        stories: data.profile.stories,
+        userBio: data.profile.user_bio,
+        userId: data.profile.user_id,
+        userName: data.profile.user_name,
       }
 
       this.setState({
-        userProfileData: formattedData,
+        myProfileData: formattedData,
         apiStatus: apiStatusConstants.success,
       })
     }
@@ -78,7 +78,7 @@ class UserProfile extends Component {
   }
 
   renderFailureView = () => (
-    <div className="failure-view-container">
+    <div className="loading-view-container">
       <img
         src="https://res.cloudinary.com/dvmp5vgbm/image/upload/v1662435108/InstaShare/SomethingWentWrong_glggye.png"
         alt="failure view"
@@ -107,12 +107,12 @@ class UserProfile extends Component {
   )
 
   renderPostsView = () => {
-    const {userProfileData} = this.state
+    const {myProfileData} = this.state
 
     return (
       <div>
         <ul className="posts-view-container">
-          {userProfileData.posts.map(post => (
+          {myProfileData.posts.map(post => (
             <li className="post-image-list-item" key={post.id}>
               <img src={post.image} alt="user post" className="post-image" />
             </li>
@@ -123,77 +123,73 @@ class UserProfile extends Component {
   }
 
   renderSuccessView = () => {
-    const {userProfileData} = this.state
+    const {myProfileData} = this.state
+    const {
+      userName,
+      profilePic,
+      postsCount,
+      followersCount,
+      followingCount,
+      userId,
+      userBio,
+      stories,
+      posts,
+    } = myProfileData
 
     return (
       <div className="user-profile-success-view-container">
         <div className="user-details-section">
-          <h1 className="mobile-user-name">{userProfileData.userName}</h1>
+          <h1 className="mobile-user-name">{userName}</h1>
           <div className="user-profile-pic-and-stats-container">
             <img
-              src={userProfileData.profilePic}
+              src={profilePic}
               alt="user profile"
               className="user-profile-pic"
             />
 
             <div className="mobile-user-stats-container">
               <div className="stats-heading-desc">
-                <span className="user-stats-heading">
-                  {userProfileData.postsCount}
-                </span>
+                <span className="user-stats-heading">{postsCount}</span>
                 <span className="user-stats-description">posts</span>
               </div>
               <div className="stats-heading-desc">
-                <span className="user-stats-heading">
-                  {userProfileData.followersCount}
-                </span>
+                <span className="user-stats-heading">{followersCount}</span>
                 <span className="user-stats-description">followers</span>
               </div>
               <div className="stats-heading-desc">
-                <span className="user-stats-heading">
-                  {userProfileData.followingCount}
-                </span>
+                <span className="user-stats-heading">{followingCount}</span>
                 <span className="user-stats-description">following</span>
               </div>
             </div>
 
             <div className="desktop-user-details">
-              <h1 className="desktop-user-name-heading">
-                {userProfileData.userName}
-              </h1>
+              <h1 className="desktop-user-name-heading">{userName}</h1>
 
               <div className="desktop-user-stats-container">
                 <p className="stats-type">
-                  <span className="stats-numbers">
-                    {userProfileData.postsCount}
-                  </span>{' '}
-                  posts
+                  <span className="stats-numbers">{postsCount}</span> posts
                 </p>
                 <p className="stats-type">
-                  <span className="stats-numbers">
-                    {userProfileData.followersCount}
-                  </span>{' '}
+                  <span className="stats-numbers">{followersCount}</span>{' '}
                   followers
                 </p>
                 <p className="stats-type">
-                  <span className="stats-numbers">
-                    {userProfileData.followingCount}
-                  </span>{' '}
+                  <span className="stats-numbers">{followingCount}</span>{' '}
                   following
                 </p>
               </div>
 
-              <p className="user-id">{userProfileData.userId}</p>
-              <p className="user-bio">{userProfileData.userBio}</p>
+              <p className="user-id">{userId}</p>
+              <p className="user-bio">{userBio}</p>
             </div>
           </div>
           <div className="user-id-bio-container">
-            <p className="user-id">{userProfileData.userId}</p>
-            <p className="user-bio">{userProfileData.userBio}</p>
+            <p className="user-id">{userId}</p>
+            <p className="user-bio">{userBio}</p>
           </div>
           <div className="user-stories-container">
             <ul className="stories-list-container">
-              {userProfileData.stories.map(story => (
+              {stories.map(story => (
                 <li key={story.id} className="story-item">
                   <div className="story-image-container">
                     <img
@@ -213,7 +209,7 @@ class UserProfile extends Component {
             <BsGrid3X3 className="posts-grid-icon" />
             <h1 className="posts-heading">Posts</h1>
           </div>
-          {userProfileData.posts.length === 0
+          {posts.length === 0
             ? this.renderNoPostsView()
             : this.renderPostsView()}
         </div>
@@ -245,4 +241,4 @@ class UserProfile extends Component {
   }
 }
 
-export default UserProfile
+export default MyProfile

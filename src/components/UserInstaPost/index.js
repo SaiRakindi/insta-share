@@ -66,7 +66,11 @@ class UserInstaPost extends Component {
         <Link to={`/users/${userId}`} className="profile-link">
           <div className="profile-section">
             <div className="image-container">
-              <img src={profilePic} alt={userName} className="profile-pic" />
+              <img
+                src={profilePic}
+                alt="post author profile"
+                className="profile-pic"
+              />
             </div>
             <p className="profile-user-name">{userName}</p>
           </div>
@@ -79,7 +83,7 @@ class UserInstaPost extends Component {
                 type="button"
                 onClick={this.toggleLike}
                 className="user-post-button"
-                data-testid="likeIcon"
+                // data-testid="likeIcon"
               >
                 <BsHeart size={20} color="#262626" />
               </button>

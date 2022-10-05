@@ -126,7 +126,7 @@ class UserStories extends Component {
             return (
               <div className="slick-item" key={userId}>
                 <img className="logo-image" src={storyUrl} alt={userName} />
-                <p className="user-story-name">{userName.split(' ')[0]}</p>
+                <p className="user-story-name">{userName}</p>
               </div>
             )
           })}

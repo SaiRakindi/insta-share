@@ -74,7 +74,7 @@ class UserPosts extends Component {
     <div className="failure-view">
       <img
         src="https://res.cloudinary.com/dvmp5vgbm/image/upload/v1662435108/InstaShare/SomethingWentWrong_glggye.png"
-        alt=""
+        alt="failure view"
       />
       <h1 className="failure-view-heading">
         Something went wrong. Please try again.
