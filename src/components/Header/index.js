@@ -1,5 +1,7 @@
 import {Component} from 'react'
 
+import Cookies from 'js-cookie'
+
 import {Link, withRouter} from 'react-router-dom'
 
 import './index.css'
@@ -13,6 +15,12 @@ class Header extends Component {
     this.setState(prevState => ({
       showMobileMenu: !prevState.showMobileMenu,
     }))
+  }
+
+  onClickLogout = () => {
+    const {history} = this.props
+    Cookies.remove('jwt_token')
+    history.replace('/login')
   }
 
   render() {
@@ -65,7 +73,11 @@ class Header extends Component {
                 <p className="list-item">Profile</p>
               </Link>
 
-              <button type="button" className="logout-button">
+              <button
+                type="button"
+                className="logout-button"
+                onClick={this.onClickLogout}
+              >
                 Logout
               </button>
             </div>

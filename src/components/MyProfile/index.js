@@ -6,6 +6,7 @@ import {BiCamera} from 'react-icons/bi'
 
 import './index.css'
 import LoaderSpinner from '../LoaderSpinner'
+import Header from '../Header'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -234,9 +235,12 @@ class MyProfile extends Component {
 
   render() {
     return (
-      <div className="user-profile-container">
-        {this.renderUserProfileView()}
-      </div>
+      <>
+        <Header />
+        <div className="user-profile-container">
+          {this.renderUserProfileView()}
+        </div>
+      </>
     )
   }
 }

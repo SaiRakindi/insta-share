@@ -10,11 +10,9 @@ import UserProfile from './components/UserProfile'
 import MyProfile from './components/MyProfile'
 
 import './App.css'
-import Header from './components/Header'
 
 const App = () => (
   <>
-    <Header />
     <Switch>
       <Route exact path="/login" component={LoginForm} />
       <ProtectedRoute exact path="/" component={Home} />
